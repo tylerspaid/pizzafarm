@@ -1,0 +1,59 @@
+import sqlite3
+import random
+
+con=sqlite3.connect("pizzatransactions.db")
+cur=con.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS transactions(time, orderid, crust, meat, veggie, status)")
+
+pizza_options = {
+    "pizza_special": ["Best Pizza", "Okay that's fine", "WHY WOULD YOU ORDER THAT??", "Custom"],
+    "pizza_crust": ["Thick", "Thin", "Ridiculously Thin"],
+    "pizza_meat_toppings": ["Pepperoni", "Sausage", "Fish"],
+    "pizza_veggie_toppings": ["Pineapple", "Olives", "Cucumber"],
+    "pizza_delivery_method": ["Pick-up", "Delivery"],
+}
+
+special_menu = {
+    "best_pizza": {
+        "name": pizza_options["pizza_special"][0],
+        "crust": pizza_options["pizza_crust"][0],
+        "meat": pizza_options["pizza_meat_toppings"][0],
+        "veggie": pizza_options["pizza_veggie_toppings"][0],
+    },
+
+    "okay_thats_fine": {
+        "name": pizza_options["pizza_special"][1],
+        "crust": pizza_options["pizza_crust"][1],
+        "meat": pizza_options["pizza_meat_toppings"][1],
+        "veggie": pizza_options["pizza_veggie_toppings"][1],
+    },
+
+    "why_would_you_order_that": {
+        "name": pizza_options["pizza_special"][2],
+        "crust": pizza_options["pizza_crust"][2],
+        "meat": pizza_options["pizza_meat_toppings"][2],
+        "veggie": pizza_options["pizza_veggie_toppings"][2],
+    },
+
+}
+
+def generate_order():
+    try:
+        try:
+            CustID = cur.execute(
+                "SELECT id FROM pizzatransactions.db " \
+                "ORDER BY your_column DESC LIMIT 1") #make sure this returns the highest order num
+            if CustID == "null": #double check what returns from an empty list
+                CustID = 0 #this is not good
+        except Exception as e:
+            print(f"error: {e}")
+            CustID = (CustID + 1)
+
+        cur.execute("""
+            INSERT INTO transaction VALUES
+            """)
+    except Exception as e:
+        print(f"error: {e}")
+
+print(f"{special_menu["best_pizza"]["name"]}: {special_menu["best_pizza"]["crust"]}")
+print(f"{special_menu["why_would_you_order_that"]["name"]}: {special_menu["why_would_you_order_that"]["crust"]}")
