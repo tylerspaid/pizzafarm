@@ -1,6 +1,6 @@
 /*table of stocked ingredients*/
 CREATE TABLE IF NOT EXISTS pantry (
-    pantry_id int GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    pantry_id int UNIQUE PRIMARY KEY,
     name VARCHAR(50) UNIQUE,
     pantry_quantity int     /*quantity as servings*/
 );
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS pantry (
 /*retain a log of inventory*/
 CREATE TABLE IF NOT EXISTS inventory_log (
     time
-    inventory_id int GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    inventory_id int UNIQUE PRIMARY KEY,
     pantry_id int REFERENCES pantry(pantry_id),
     inventory_adjustment int,
     inventory_quantity int,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS inventory_log (
 
 /*table of quick select recipes*/
 CREATE TABLE IF NOT EXISTS menu (
-    menu_id int GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY UNIQUE
+    menu_id int NOT NULL PRIMARY KEY UNIQUE
     name VARCHAR(50) NOT NULL UNIQUE,
     ingredient1_id int REFERENCES pantry(pantry_id),
     ingredient2_id int REFERENCES pantry(pantry_id),
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS menu (
 
 CREATE TABLE IF NOT EXISTS orders (
     time
-    order_id int GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    order_id int UNIQUE PRIMARY KEY,
     crust_id int REFERENCES pantry(pantry_id),
     meat int REFERENCES pantry(pantry_id),
     veggie int REFERENCES pantry(pantry_id),
