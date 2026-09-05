@@ -1,13 +1,17 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const { Pool } = require('pg')
 const pool = new Pool({
-    host: rds endpoint
-    user: postgres user
+    host: locahost
+    user: postgres
     password:
     database: schema.sql
+    port 5432
     max: 20
 })
+
+module.exports = pool;
 
 app.use(express.json());
 app.listen(3000, () => {
@@ -19,7 +23,16 @@ const fetchPostgres()
 app.post('/api/menu', async (req, res) => {
     try {
         const request = req.body.request
-        const menuData = await fetchMenu(/*structure arguments*/);
+        const menuData = await pool.query(
+            SELECT
+                m.menu_id,
+                m.name,
+                mi.menu_id,
+                mi.pantry_id
+            FROM menu m
+            JOIN menu_ingredients mi ON m.menu_id = m.pantry_id;
+
+        );
         const orderStructure = await fetchOrderStructure();
         res.json({
             status: "success",
