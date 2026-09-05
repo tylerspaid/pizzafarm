@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS pantry (
 CREATE TABLE IF NOT EXISTS menu (
     menu_id INT NOT NULL PRIMARY KEY UNIQUE,
     name VARCHAR(50) NOT NULL UNIQUE,
-    menu_price NOT NULL NUMERIC(5, 2),
+    price NOT NULL NUMERIC(5, 2),
 );
 
-/* CREATE TABLE IF NOT EXISTS menu_ingredients (
+CREATE TABLE IF NOT EXISTS menu_ingredients (
     menu_id INT REFERENCES menu(menu_id),
     pantry_id INT REFERENCES pantry(pantry_id)
     PRIMARY KEY (menu_id, pantry_id)
-); */ /*realized this isnt relevant to system*/
+); 
 
 /*retain a log of inventory*/
 CREATE TABLE IF NOT EXISTS inventory_log (

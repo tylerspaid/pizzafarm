@@ -21,7 +21,7 @@ INSERT INTO pantry (pantry_id, name, category, pantry_quantity) VALUES (
     (12, 'ridiculously thin crust', 5, '35');
 );
 
-INSERT INTO menu (menu_id, name, menu_price) VALUES (
+INSERT INTO menu (menu_id, name, price) VALUES (
     (1, 'Best Pizza', 16.99),
     (2, 'Okay, That''s Fine', 14.99),
     (3, 'WHY WOULD YOU ORDER THAT??', 23.99);

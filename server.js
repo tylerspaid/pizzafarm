@@ -18,30 +18,29 @@ app.listen(3000, () => {
     console.log("Server is running on port 3000!");
 });
 
-const fetchPostgres()
+const fetchMenu => {
+    SELECT name, price FROM menu;
+}
 
-app.post('/api/menu', async (req, res) => {
+/* const fetchIngredients => {
+    SELECT category_id, name FROM categories
+    SELECT
+} */ /* finish building custom pizza generation */
+
+app.get('/api/menu', async (req, res) => {
     try {
-        const request = req.body.request
-        const menuData = await pool.query(
-            SELECT menu_name FROM menu
-        );
-        const orderStructure = await fetchOrderStructure();
-        res.json({
-            status: "success",
-            menuData: menuData
-            orderStructure: orderStructure
-        })
+        dbResult = await pool.query({fetchMenu})
+        return res.json({dbResult});
     } catch (error) {
-        
+        res.json({success: false, error: "There was an error in app.get /api/menu"})
     }
 });
 
-app.post('/api/process', async (req, res) => {
+/* app.post('/api/processOrder', async (req, res) => {
     try {
         const userOrder = req.body.userOrder
         
     } catch (error) {
         
     }
-});
+}); */
