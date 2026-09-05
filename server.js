@@ -24,14 +24,7 @@ app.post('/api/menu', async (req, res) => {
     try {
         const request = req.body.request
         const menuData = await pool.query(
-            SELECT
-                m.menu_id,
-                m.name,
-                mi.menu_id,
-                mi.pantry_id
-            FROM menu m
-            JOIN menu_ingredients mi ON m.menu_id = m.pantry_id;
-
+            SELECT menu_name FROM menu
         );
         const orderStructure = await fetchOrderStructure();
         res.json({

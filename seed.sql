@@ -27,8 +27,8 @@ INSERT INTO menu (menu_id, name, menu_price) VALUES (
     (3, 'WHY WOULD YOU ORDER THAT??', 23.99);
 );
 
-/*INSERT INTO menu_ingredients (menu_id, pantry_id) VALUES (
+INSERT INTO menu_ingredients (menu_id, pantry_id) VALUES (
     (1, 1), (1, 4), (1, 7), (1, 8), (1, 10),
     (2, 2), (2, 5), (2, 7), (2, 8), (2, 11),
     (3, 3), (3, 6), (3, 7), (3, 9), (3, 12);
-);*/        /*realized this isnt relevant to system*/
+);
