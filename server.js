@@ -3,11 +3,11 @@ const app = express();
 const PORT = 3000;
 const { Pool } = require('pg')
 const pool = new Pool({
-    host: locahost
-    user: postgres
-    password:
-    database: schema.sql
-    port 5432
+    host: "locahost",
+    user: "postgres",
+    password: "make-password-safe"
+    database: "schema.sql",
+    port 5432,
     max: 20
 })
 
