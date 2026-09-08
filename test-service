@@ -8,13 +8,31 @@ connection_config = {
     "port": 5432
 }
 
-with psycopg2.connect(**connection_config) as conn:
-    with conn.cursor() as cursor:
-        query = "SELECT * from menu"
-        records = cursor.fetchall()
-    for row in records:
-        print(f"menu id: {row[0]} | name: {row[1]} | price: {row[2]}")
+def direct_db_conn():
+    with psycopg2.connect(**connection_config) as conn:
+        with conn.cursor() as cursor:
+            query = "SELECT * from menu"
+            cursor.execute(query)
+            records = cursor.fetchall()
+            for row in records:
+                print(f"menu id: {row[0]} | name: {row[1]} | price: {row[2]}")
+    cursor.close()
+    conn.close()
 
+def print_db_table():
+    pass
 
-cur.close()
-conn.close()
+function_dict = {
+    'printdb': print_entire_db,
+    'printtable': print_db_table
+}
+
+try:
+    key_list = list(function_dict)
+    user_input = input(f"What would you like to do? {key_list}]\n Execute function: ")
+    if user_input in key_list:
+        execute_function = function_dict[user_input]
+        execute_function()
+        print(f"Requested function successfully executed.")
+except Exception as e:
+    print(f"error with input block: {e}")
