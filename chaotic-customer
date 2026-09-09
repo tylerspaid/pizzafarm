@@ -1,0 +1,67 @@
+import requests
+import random
+
+base_url = 'http://localhost:3000';
+
+connection_config = {
+    "host": "localhost",
+    "database": "pizzafarm",
+    "user": "postgres",
+    "password": "make-password-safe",
+    "port": 5432
+}
+
+def get_menu():
+    try:
+        response = requests.get(f"{base_url}/api/menu")
+        response.raise_for_status()
+        menu_dict = response.json()
+        if menu_dict.get("success"):
+            return menu_dict["data"]
+        else:
+            print(f"call_server failed with:", menu_dict.get("message"))
+    except requests.exceptions.HTTPError as e:
+        print(e.response.json())
+
+def get_pantry():
+    try:
+        response = requests.get(f"{base_url}/api/custom")
+        response.raise_for_status()
+        pantry_dict = response.json()
+        if pantry_dict.get("success"):
+            return pantry_dict["data"]
+        else:
+            print(f"call_server failed with:", pantry_dict.get("message"))
+    except requests.exceptions.HTTPError as e:
+        print(e.response.json())
+
+def create_menu_order():
+    menu_ids = []
+    menu = get_menu()
+    for row in menu:
+        menu_ids.append(row["menu_id"])
+    selection = random.choice(menu_ids)
+    return selection
+
+#def create_custom_order():
+    pantry = get_pantry()
+    custom_meat_ids = []
+    custom_vegetable_ids = []
+    custom_cheese_ids = []
+    custom_sauce_ids = []
+    custom_crust_ids = []
+    for row in pantry:
+        custom_meat_ids.append(row["pantry_id"])
+    selection = random.choice(menu_ids)
+    return selection
+
+#order_options = [create_menu_order, create_custom_order]
+
+#def generate_order():
+    order_type = random.choice(order_options)
+    order = order_type()
+    print(order)
+
+#generate_order()
+
+print(create_menu_order())
