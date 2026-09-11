@@ -16,4 +16,4 @@ EXPOSE 3000
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 USER appuser
 
-CMD ["python3", "chaotic-customer"]
+CMD ["node", "server.js"]

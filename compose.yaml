@@ -1,0 +1,7 @@
+services:
+  python-app:
+    build: python-app/
+  backend:
+    build: backend/
+    ports:
+      - "3000:3000"
