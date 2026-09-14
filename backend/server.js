@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 const { Pool } = require('pg')
 const pool = new Pool({
-    host: 'localhost',
+    host: 'db',
     user: 'postgres',
     password: 'make-password-safe',
     database: 'pizzafarm',

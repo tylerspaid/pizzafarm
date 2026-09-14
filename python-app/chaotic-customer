@@ -1,11 +1,10 @@
 import requests
 import random
-import logging
 
-base_url = 'http://localhost:3000';
+base_url = 'http://backend:3000';
 
 connection_config = {
-    "host": "localhost",
+    "host": "db",
     "database": "pizzafarm",
     "user": "postgres",
     "password": "make-password-safe",
