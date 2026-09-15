@@ -10,10 +10,13 @@ RUN npm run build
 FROM node:22-slim AS runtime
 WORKDIR /app
 
+COPY package*.json ./
+RUN npm ci --omit=dev
+
 COPY server.js ./
 EXPOSE 3000
 
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 USER appuser
 
-CMD ["python3", "chaotic-customer"]
+CMD ["node", "server.js"]
