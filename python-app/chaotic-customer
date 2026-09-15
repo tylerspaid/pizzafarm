@@ -1,5 +1,6 @@
 import requests
 import random
+import time
 
 base_url = 'http://backend:3000';
 
@@ -64,4 +65,12 @@ def create_menu_order():
 
 #generate_order()
 
-print(create_menu_order())
+
+while True:
+    try:
+        print(create_menu_order(), flush=True)
+        time.sleep(1)
+    except Exception as e:
+        print(f"Error looping creation: {e}")
+    except KeyboardInterrupt:
+        print(f"Chaotic-customer loop stopping due to keyboard interrupt...")
