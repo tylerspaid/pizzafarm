@@ -1,6 +1,7 @@
 import requests
 import random
 import time
+import logging
 
 base_url = 'http://backend:3000';
 
@@ -12,6 +13,11 @@ connection_config = {
     "port": 5432
 }
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+)
+
 def get_menu():
     try:
         response = requests.get(f"{base_url}/api/menu")
@@ -20,9 +26,9 @@ def get_menu():
         if menu_dict.get("success"):
             return menu_dict["data"]
         else:
-            print(f"call_server failed with:", menu_dict.get("message"))
+            logging.error(f"call_server failed with:", menu_dict.get("message"))
     except requests.exceptions.HTTPError as e:
-        print(e.response.json())
+        logging.error(e.response.json())
 
 def get_pantry():
     try:
@@ -32,9 +38,9 @@ def get_pantry():
         if pantry_dict.get("success"):
             return pantry_dict["data"]
         else:
-            print(f"call_server failed with:", pantry_dict.get("message"))
+            logging.error(f"call_server failed with:", pantry_dict.get("message"))
     except requests.exceptions.HTTPError as e:
-        print(e.response.json())
+        logging.error(e.response.json())
 
 def create_menu_order():
     menu_ids = []
@@ -61,16 +67,16 @@ def create_menu_order():
 #def generate_order():
     order_type = random.choice(order_options)
     order = order_type()
-    print(order)
+    logging.info(order)
 
 #generate_order()
 
 
 while True:
     try:
-        print(create_menu_order(), flush=True)
+        logging.info(create_menu_order())
         time.sleep(1)
     except Exception as e:
-        print(f"Error looping creation: {e}")
+        logging.error(f"Error looping creation: {e}")
     except KeyboardInterrupt:
-        print(f"Chaotic-customer loop stopping due to keyboard interrupt...")
+        logging.error(f"Chaotic-customer loop stopping due to keyboard interrupt...")

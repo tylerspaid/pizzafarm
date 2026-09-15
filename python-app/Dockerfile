@@ -6,7 +6,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY chaotic-customer ./
 
-RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+RUN groupadd -r appgroup && \
+    useradd -r -g appgroup appuser && \
+    chown -R appuser:appgroup /app
 USER appuser
 
 EXPOSE 8080
